@@ -11,6 +11,8 @@ import express from 'express';
 import { discordLogger } from './utils/logger';
 import Event from './structures/Event'
 import Command from './structures/Command';
+import safeConfig from './utils/env';
+import database from './utils/database';
 
 export const client = new Discord.Client({
     intents: [Discord.IntentsBitField.Flags.Guilds]
@@ -60,12 +62,19 @@ const cmdsLoading = (async function loadCommands(dir=path.resolve(__dirname, "./
 Promise.all([eventsLoading, cmdsLoading]).then(() => {
     discordLogger.info("Finished loading commands and events.");
     discordLogger.info(`Connecting to Discord...`);
-    client.login(process.env.DISCORD_TOKEN);
+    client.login(safeConfig.DISCORD_TOKEN);
 });
 
+try {
+    database.authenticate();
+    discordLogger.info('Database connection has been established successfully.');
+}   catch (error) {
+    discordLogger.info('Unable to connect to the database:', error);
+}
+
 passport.use(new BnetStrategy({
-    clientID: process.env.BNET_CLIENT_ID,
-    clientSecret: process.env.BNET_SECRET,
+    clientID: safeConfig.BNET_CLIENT_ID,
+    clientSecret: safeConfig.BNET_SECRET,
     // callbackURL: "https://localhost:3000/oauth/battlenet/callback",
     region: "eu"
 }, function(accessToken: string, refreshToken: string, profile: string, done:(a: null, b: string) => void): void {
