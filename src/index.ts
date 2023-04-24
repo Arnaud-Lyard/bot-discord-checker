@@ -10,7 +10,27 @@ import { discordLogger } from "./utils/logger";
 import Event from "./structures/Event";
 import Command from "./structures/Command";
 import safeConfig from "./utils/env";
-import database from "./utils/database";
+import { getToken } from "./utils/api";
+import { sequelize } from "./utils/database";
+const databaseConnection = async () => {
+  try {
+    await sequelize.authenticate();
+    discordLogger.info(
+      "Database connection has been established successfully."
+    );
+  } catch (error) {
+    discordLogger.info("Unable to connect to the database:", error);
+  }
+
+  try {
+    await sequelize.sync({ force: true });
+    discordLogger.info("Player table created successfully!");
+  } catch (error) {
+    discordLogger.info("Unable to create table : ", error);
+  }
+};
+
+databaseConnection();
 
 export const client = new Discord.Client({
   intents: [Discord.IntentsBitField.Flags.Guilds],
@@ -67,24 +87,7 @@ Promise.all([eventsLoading, cmdsLoading]).then(() => {
   client.login(safeConfig.DISCORD_TOKEN);
 });
 
-try {
-  database.authenticate();
-  discordLogger.info("Database connection has been established successfully.");
-} catch (error) {
-  discordLogger.info("Unable to connect to the database:", error);
-}
-
-let request = fetch(`${safeConfig.BNET_TOKEN_URL}`, {
-  body: new URLSearchParams({ grant_type: `${safeConfig.BNET_GRANT_TYPE}` }),
-  method: "POST",
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
-    Authorization:
-      "Basic " +
-      Buffer.from(
-        `${safeConfig.BNET_CLIENT_ID}:${safeConfig.BNET_CLIENT_SECRET}`
-      ).toString("base64"),
-  },
-})
-  .then((response) => response.json())
-  .then((json) => console.log(json));
+export const token: Promise<Response | undefined> =
+  (async function connection() {
+    return await getToken();
+  })();

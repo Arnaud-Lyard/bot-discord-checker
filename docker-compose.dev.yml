@@ -12,3 +12,19 @@ services:
       retries: 5
     ports:
       - 5432:5432
+
+  server:
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_USER=${DB_USER}
+      - DB_NAME=${DB_NAME}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+    build: .
+    ports:
+      - 4000:4000
+    volumes:
+      - ./src:/app/src

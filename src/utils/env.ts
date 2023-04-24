@@ -21,7 +21,7 @@ interface ENV {
   DB_USER: string | undefined;
   DB_NAME: string | undefined;
   DB_HOST: string | undefined;
-  DB_PORT: string | undefined;
+  DB_PORT: number | undefined;
 }
 
 interface Config {
@@ -37,8 +37,7 @@ interface Config {
   DB_USER: string;
   DB_NAME: string;
   DB_HOST: string;
-  DB_PORT: string;
-
+  DB_PORT: number;
 }
 
 // Loading process.env as ENV interface
@@ -57,8 +56,8 @@ const getConfig = (): ENV => {
     DB_USER: process.env.DB_USER,
     DB_NAME: process.env.DB_NAME,
     DB_HOST: process.env.DB_HOST,
-    DB_PORT: process.env.DB_PORT,
-    };
+    DB_PORT: process.env.DB_PORT ? Number(process.env.DB_PORT) : undefined,
+  };
 };
 
 // Throwing an Error if any field was undefined we don't
