@@ -1,8 +1,4 @@
 import Discord from "discord.js";
-import getConfig from "./utils/config";
-import * as dotenv from "dotenv";
-dotenv.config();
-const config = getConfig();
 import fs from "fs";
 import path from "path";
 import express from "express";
@@ -31,7 +27,6 @@ const databaseConnection = async () => {
 };
 
 databaseConnection();
-
 export const client = new Discord.Client({
   intents: [Discord.IntentsBitField.Flags.Guilds],
 });

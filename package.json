@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc -p .",
     "start": "npx ts-node ./src/index.ts",
-    "dev": "ts-node-dev src/index.ts"
+    "dev": "ts-node-dev --poll src/index.ts"
   },
   "keywords": [],
   "author": "",
