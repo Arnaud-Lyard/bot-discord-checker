@@ -107,12 +107,17 @@ function buildSlashCommand(
   const defaultOptions = new SlashCommandBuilder()
     .setName(command.name)
     .setDescription(command.description);
-  // .addUserOption((option) =>
-  //   option
-  //     .setName("user")
-  //     .setDescription("The user to add.")
-  //     .setRequired(command.user !== undefined)
-  // );
+
+  if (
+    command.options !== undefined &&
+    command.options.addOptions !== undefined
+  ) {
+    const name = command.options.addOptions.name;
+    const description = command.options.addOptions.description;
+    defaultOptions.addUserOption((option) =>
+      option.setName(name).setDescription(description).setRequired(true)
+    );
+  }
 
   var data = command.build(client, defaultOptions);
   if (data instanceof SlashCommandBuilder) data = data.toJSON();

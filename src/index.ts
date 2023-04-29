@@ -82,7 +82,7 @@ Promise.all([eventsLoading, cmdsLoading]).then(() => {
   client.login(safeConfig.DISCORD_TOKEN);
 });
 
-export const token: Promise<Response | undefined> =
-  (async function connection() {
-    return await getToken();
-  })();
+// export const token: Promise<Response | undefined> =
+//   (async function connection() {
+//     return await getToken();
+//   })();

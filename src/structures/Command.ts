@@ -8,24 +8,27 @@ import { RESTPostAPIApplicationCommandsJSONBody } from "discord-api-types/v10";
 
 export type SlashCommandOptions = {
   requiredPermissions: PermissionResolvable[];
+  addOptions?: addOptions;
+};
+
+export type addOptions = {
+  name: string;
+  description: string;
 };
 
 export default class SlashCommand {
   name: string;
   description: string;
   options: SlashCommandOptions | undefined;
-  user: string | undefined;
 
   constructor(
     name: string,
     description: string,
-    options?: SlashCommandOptions,
-    user?: string
+    options?: SlashCommandOptions
   ) {
     this.name = name;
     this.description = description;
     this.options = options;
-    this.user = user;
   }
 
   exec(interaction: ChatInputCommandInteraction) {

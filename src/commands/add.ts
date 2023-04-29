@@ -4,14 +4,13 @@ import { primaryEmbed } from "../utils/embeds";
 
 export default class AddCommand extends SlashCommand {
   constructor() {
-    super(
-      "add",
-      "Add a battletag in list.",
-      {
-        requiredPermissions: ["Administrator"],
+    super("add", "Add a battletag in list.", {
+      requiredPermissions: ["Administrator"],
+      addOptions: {
+        name: "user",
+        description: "The user to add.",
       },
-      "admin"
-    );
+    });
   }
 
   exec(interaction: CommandInteraction) {
