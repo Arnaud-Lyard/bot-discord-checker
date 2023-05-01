@@ -108,15 +108,21 @@ function buildSlashCommand(
     .setName(command.name)
     .setDescription(command.description);
 
-  if (
-    command.options !== undefined &&
-    command.options.addOptions !== undefined
-  ) {
-    const name = command.options.addOptions.name;
-    const description = command.options.addOptions.description;
-    defaultOptions.addUserOption((option) =>
-      option.setName(name).setDescription(description).setRequired(true)
-    );
+  if (command.options !== undefined) {
+    if (command.options.addUserOption) {
+      const name = command.options.addUserOption.name;
+      const description = command.options.addUserOption.description;
+      defaultOptions.addUserOption((option) =>
+        option.setName(name).setDescription(description).setRequired(true)
+      );
+    }
+    if (command.options.addStringOption) {
+      const name = command.options.addStringOption.name;
+      const description = command.options.addStringOption.description;
+      defaultOptions.addStringOption((option) =>
+        option.setName(name).setDescription(description).setRequired(true)
+      );
+    }
   }
 
   var data = command.build(client, defaultOptions);

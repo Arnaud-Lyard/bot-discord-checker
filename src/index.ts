@@ -6,8 +6,8 @@ import { discordLogger } from "./utils/logger";
 import Event from "./structures/Event";
 import Command from "./structures/Command";
 import safeConfig from "./utils/env";
-import { getToken } from "./utils/api";
 import { sequelize } from "./utils/database";
+
 const databaseConnection = async () => {
   try {
     await sequelize.authenticate();
@@ -81,8 +81,3 @@ Promise.all([eventsLoading, cmdsLoading]).then(() => {
   discordLogger.info(`Connecting to Discord...`);
   client.login(safeConfig.DISCORD_TOKEN);
 });
-
-// export const token: Promise<Response | undefined> =
-//   (async function connection() {
-//     return await getToken();
-//   })();
