@@ -18,4 +18,4 @@ COPY .env .env
 COPY logs logs
 copy config.yml config.yml
 
-CMD ["pnpm", "dev"]
+CMD pnpm dev register

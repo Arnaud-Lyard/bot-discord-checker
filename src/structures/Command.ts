@@ -8,18 +8,6 @@ import { RESTPostAPIApplicationCommandsJSONBody } from "discord-api-types/v10";
 
 export type SlashCommandOptions = {
   requiredPermissions: PermissionResolvable[];
-  addUserOption?: addUserOption;
-  addStringOption?: addStringOption;
-};
-
-export type addUserOption = {
-  name: string;
-  description: string;
-};
-
-export type addStringOption = {
-  name: string;
-  description: string;
 };
 
 export default class SlashCommand {

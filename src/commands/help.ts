@@ -1,17 +1,34 @@
 import SlashCommand from "../structures/Command";
-import { CommandInteraction } from "discord.js";
+import { Client, CommandInteraction, SlashCommandBuilder } from "discord.js";
 import { primaryEmbed } from "../utils/embeds";
 
 export default class HelpCommand extends SlashCommand {
   constructor() {
-    super("example", "An example command.", {
+    super("help", "An help command.", {
       requiredPermissions: ["MentionEveryone"],
     });
   }
 
   exec(interaction: CommandInteraction) {
     interaction.reply({
-      embeds: [primaryEmbed("title", "Yay this works!")],
+      embeds: [primaryEmbed("help", "Yay this works!")],
     });
+  }
+
+  build(client: Client<boolean>, defaultCommand: SlashCommandBuilder) {
+    return defaultCommand
+      .addBooleanOption((boolean) =>
+        boolean
+          .setName("boolean")
+          .setDescription("test boolean option")
+          .setRequired(true)
+      )
+      .addStringOption((string) =>
+        string
+          .setName("string")
+          .setDescription("test string option")
+          .setRequired(true)
+      )
+      .toJSON();
   }
 }

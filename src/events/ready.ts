@@ -98,6 +98,22 @@ export default class ReadyEvent extends Event {
         }
       }
     }
+    if (process.argv[2] === "del") {
+      const commandId = process.argv[3];
+      if (!commandId) {
+        discordLogger.warn(`Delete option requires a valid command ID.`);
+        return;
+      }
+      const commandFetched = await client.application?.commands.fetch(
+        commandId
+      );
+      if (!commandFetched) {
+        discordLogger.warn(`Could not find command ${commandId}.`);
+        return;
+      }
+      await client.application?.commands.delete(commandFetched);
+      discordLogger.info(`Deleted command with id ${commandId}`);
+    }
   }
 }
 
@@ -107,24 +123,6 @@ function buildSlashCommand(
   const defaultOptions = new SlashCommandBuilder()
     .setName(command.name)
     .setDescription(command.description);
-
-  if (command.options !== undefined) {
-    if (command.options.addUserOption) {
-      const name = command.options.addUserOption.name;
-      const description = command.options.addUserOption.description;
-      defaultOptions.addUserOption((option) =>
-        option.setName(name).setDescription(description).setRequired(true)
-      );
-    }
-    if (command.options.addStringOption) {
-      const name = command.options.addStringOption.name;
-      const description = command.options.addStringOption.description;
-      defaultOptions.addStringOption((option) =>
-        option.setName(name).setDescription(description).setRequired(true)
-      );
-    }
-  }
-
   var data = command.build(client, defaultOptions);
   if (data instanceof SlashCommandBuilder) data = data.toJSON();
 
