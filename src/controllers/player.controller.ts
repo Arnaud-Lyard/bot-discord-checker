@@ -3,6 +3,7 @@ import { IBattletag } from "../types/add";
 import { Player } from "../models/player.model";
 import { CacheType, CommandInteraction } from "discord.js";
 import { User } from "../models/user.model";
+import { discordLogger } from "../utils/logger";
 
 export const savePlayer = async (
   battletagInput: CommandInteraction<CacheType>
@@ -43,7 +44,7 @@ export const savePlayer = async (
     });
     return player;
   } catch (error) {
-    console.error(error);
+    discordLogger.debug(error);
     throw new Error(`Error while saving battletag`);
   }
 };
@@ -83,7 +84,7 @@ export const deletePlayer = async (
 
     return player;
   } catch (error) {
-    console.error(error);
+    discordLogger.debug(error);
     throw new Error(`Error while deleting battletag`);
   }
 };

@@ -19,6 +19,9 @@ export class Player extends Model {
   @Column
   declare userId: number;
 
-  @BelongsTo(() => User)
+  @BelongsTo(() => User, {
+    foreignKey: "userId",
+    onDelete: "CASCADE",
+  })
   user: User;
 }

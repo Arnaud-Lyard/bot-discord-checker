@@ -1,6 +1,6 @@
 import { CacheType, CommandInteraction } from "discord.js";
 import { User } from "../models/user.model";
-
+import { discordLogger } from "../utils/logger";
 export const deleteUser = async (
   userInput: CommandInteraction<CacheType>
 ): Promise<number> => {
@@ -10,11 +10,11 @@ export const deleteUser = async (
 
     const { username, discriminator } = userInterraction.user!;
 
-    const userAlreadyExist = await User.findOne({
+    const userExist = await User.findOne({
       where: { username, discriminator },
     });
 
-    if (userAlreadyExist === null)
+    if (userExist === null)
       throw new Error(`User ${username}#${discriminator} doesn't exist`);
 
     const user = await User.destroy({
@@ -23,7 +23,7 @@ export const deleteUser = async (
     });
     return user;
   } catch (error) {
-    console.error(error);
+    discordLogger.debug(error);
     throw new Error(`Error while deleting user`);
   }
 };
