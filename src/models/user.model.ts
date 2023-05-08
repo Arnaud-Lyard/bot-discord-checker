@@ -10,14 +10,14 @@ import { Player } from "./player.model";
 
 @Table
 export class User extends Model {
-  @AllowNull(false)
-  @Column(DataType.STRING(255))
-  declare username: string;
+  @Column
+  username!: string;
 
-  @AllowNull(false)
-  @Column(DataType.INTEGER)
-  declare discriminator: number;
+  @Column
+  discriminator!: string;
 
-  @HasMany(() => Player)
+  @HasMany(() => Player, {
+    onDelete: "CASCADE",
+  })
   players: Player[];
 }

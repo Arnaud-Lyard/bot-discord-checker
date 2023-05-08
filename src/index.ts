@@ -19,7 +19,7 @@ const databaseConnection = async () => {
   }
 
   try {
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ alter: true });
     discordLogger.info("Player table created successfully!");
   } catch (error) {
     discordLogger.info("Unable to create table : ", error);

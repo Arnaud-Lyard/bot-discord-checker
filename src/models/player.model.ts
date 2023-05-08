@@ -11,13 +11,15 @@ import { User } from "./user.model";
 
 @Table
 export class Player extends Model {
-  @AllowNull(false)
-  @Column(DataType.STRING(255))
-  declare battletag: string;
+  @Column
+  battletag!: string;
+
+  @Column
+  level?: number;
 
   @ForeignKey(() => User)
   @Column
-  declare userId: number;
+  userId!: number;
 
   @BelongsTo(() => User, {
     foreignKey: "userId",
