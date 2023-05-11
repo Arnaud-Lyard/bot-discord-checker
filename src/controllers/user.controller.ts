@@ -1,29 +1,37 @@
-import { CacheType, CommandInteraction } from "discord.js";
+import { CacheType, CommandInteraction, InteractionResponse } from "discord.js";
 import { User } from "../models/user.model";
 import { discordLogger } from "../utils/logger";
+import { primaryEmbed } from "../utils/embeds";
 export const deleteUser = async (
-  userInput: CommandInteraction<CacheType>
-): Promise<number> => {
-  try {
-    const userInterraction = userInput.options.get("user");
-    if (!userInterraction) throw new Error("No user interraction found");
+  interaction: CommandInteraction<CacheType>
+): Promise<InteractionResponse<boolean>> => {
+  const userInterraction = interaction.options.get("user");
+  const { username, discriminator } = userInterraction?.user!;
 
-    const { username, discriminator } = userInterraction.user!;
+  const userExist = await User.findOne({
+    where: { username, discriminator },
+  });
 
-    const userExist = await User.findOne({
-      where: { username, discriminator },
-    });
-
-    if (userExist === null)
-      throw new Error(`User ${username}#${discriminator} doesn't exist`);
-
-    const user = await User.destroy({
+  if (userExist) {
+    await User.destroy({
       where: { username, discriminator },
       cascade: true,
     });
-    return user;
-  } catch (error) {
-    discordLogger.debug(error);
-    throw new Error(`Error while deleting user`);
+    return interaction.reply({
+      embeds: [
+        primaryEmbed(
+          "deleteuser",
+          `User ${username}#${discriminator} and all his battletags have been deleted`
+        ),
+      ],
+    });
   }
+  return interaction.reply({
+    embeds: [
+      primaryEmbed(
+        "deleteplayer",
+        `User ${username}#${discriminator} in not registered`
+      ),
+    ],
+  });
 };

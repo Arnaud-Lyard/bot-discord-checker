@@ -12,9 +12,6 @@ export default class SavePlayerCommand extends SlashCommand {
 
   exec(interaction: CommandInteraction) {
     savePlayer(interaction);
-    interaction.reply({
-      embeds: [primaryEmbed("saveplayer", "Yay this works!")],
-    });
   }
   build(client: Client<boolean>, defaultCommand: SlashCommandBuilder) {
     return defaultCommand

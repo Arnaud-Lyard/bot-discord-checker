@@ -1,24 +1,27 @@
 import SlashCommand from "../structures/Command";
 import { Client, CommandInteraction, SlashCommandBuilder } from "discord.js";
 import { primaryEmbed } from "../utils/embeds";
-import { deleteUser } from "../controllers/user.controller";
+import { rank } from "../controllers/ranking.controller";
 
-export default class DeleteUserCommand extends SlashCommand {
+export default class SavePlayerCommand extends SlashCommand {
   constructor() {
-    super("deleteuser", "Delete a user and his information", {
-      requiredPermissions: ["Administrator"],
+    super("rank", "Get my rank in leaderboard.", {
+      requiredPermissions: ["MentionEveryone"],
     });
   }
 
   exec(interaction: CommandInteraction) {
-    deleteUser(interaction);
+    rank(interaction);
+    interaction.reply({
+      embeds: [primaryEmbed("rank", "Yay this works!")],
+    });
   }
   build(client: Client<boolean>, defaultCommand: SlashCommandBuilder) {
     return defaultCommand
       .addUserOption((user) =>
         user
           .setName("user")
-          .setDescription("The user to delete.")
+          .setDescription("Get rank for a user")
           .setRequired(true)
       )
       .toJSON();
