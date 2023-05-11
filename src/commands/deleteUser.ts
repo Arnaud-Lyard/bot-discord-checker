@@ -12,9 +12,6 @@ export default class DeleteUserCommand extends SlashCommand {
 
   exec(interaction: CommandInteraction) {
     deleteUser(interaction);
-    interaction.reply({
-      embeds: [primaryEmbed("deleteuser", "Yay this works!")],
-    });
   }
   build(client: Client<boolean>, defaultCommand: SlashCommandBuilder) {
     return defaultCommand

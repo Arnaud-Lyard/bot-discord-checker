@@ -18,14 +18,8 @@ export const rank = async (
     if (!userExist)
       throw new Error(`User ${username}#${discriminator} does not exist`);
 
-    const usersWithPlayers = await User.findAll({
-      include: {
-        model: Player,
-        required: true,
-      },
-    });
-
-    console.log(usersWithPlayers[0].players); // Vérifiez si les joueurs sont récupérés pour chaque utilisateur
+    const usersWithPlayers = await User.findAll({ include: Player });
+    console.log(JSON.stringify(usersWithPlayers, null, 2));
 
     return 1;
   } catch (error) {

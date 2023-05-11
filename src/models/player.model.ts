@@ -1,29 +1,25 @@
-import {
-  Table,
-  Column,
-  Model,
-  DataType,
-  AllowNull,
-  ForeignKey,
-  BelongsTo,
-} from "sequelize-typescript";
+import { DataTypes, Model } from "sequelize";
+import { sequelize } from "../utils/database";
 import { User } from "./user.model";
-
-@Table
 export class Player extends Model {
-  @Column
-  battletag!: string;
-
-  @Column
-  level?: number;
-
-  @ForeignKey(() => User)
-  @Column
-  userId!: number;
-
-  @BelongsTo(() => User, {
-    foreignKey: "userId",
-    onDelete: "CASCADE",
-  })
-  user: User;
+  declare id: number;
+  declare battletag: string;
 }
+
+Player.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    battletag: {
+      type: DataTypes.STRING,
+    },
+  },
+  { sequelize }
+);
+User.hasMany(Player, {
+  foreignKey: "userId",
+  onDelete: "CASCADE",
+});

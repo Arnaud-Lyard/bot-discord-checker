@@ -1,23 +1,28 @@
-import {
-  Table,
-  Column,
-  Model,
-  DataType,
-  AllowNull,
-  HasMany,
-} from "sequelize-typescript";
+import { DataTypes, Model } from "sequelize";
+import { sequelize } from "../utils/database";
 import { Player } from "./player.model";
-
-@Table
 export class User extends Model {
-  @Column
-  username!: string;
-
-  @Column
-  discriminator!: string;
-
-  @HasMany(() => Player, {
-    onDelete: "CASCADE",
-  })
-  players: Player[];
+  declare id: number;
+  declare username: string;
+  declare discriminator: number;
 }
+
+User.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    discriminator: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+  },
+  { sequelize }
+);
+// User.belongsTo(Player);

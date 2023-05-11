@@ -20,12 +20,11 @@ const databaseConnection = async () => {
 
   try {
     await sequelize.sync({ alter: true });
-    discordLogger.info("Player table created successfully!");
+    discordLogger.info("Tables are created successfully!");
   } catch (error) {
-    discordLogger.info("Unable to create table : ", error);
+    discordLogger.info("Unable to create tables : ", error);
   }
 };
-
 databaseConnection();
 export const client = new Discord.Client({
   intents: [Discord.IntentsBitField.Flags.Guilds],
