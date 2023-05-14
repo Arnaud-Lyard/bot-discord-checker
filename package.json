@@ -8,8 +8,8 @@
     "build": "npx tsc -p .",
     "start": "npx ts-node ./src/index.ts",
     "dev": "ts-node-dev --poll src/index.ts",
-    "edition": "pnpm dev edit deleteuser",
-    "delete": "pnpm dev del"
+    "edition": "pnpm dev edit commandName",
+    "delete": "pnpm dev del commandNumber"
   },
   "keywords": [],
   "author": "",

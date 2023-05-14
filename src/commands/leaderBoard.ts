@@ -1,7 +1,7 @@
 import SlashCommand from "../structures/Command";
 import { Client, CommandInteraction, SlashCommandBuilder } from "discord.js";
 import { primaryEmbed } from "../utils/embeds";
-import { leaderBoard } from "../controllers/ranking.controller";
+import { leaderBoard } from "../controllers/player.controller";
 
 export default class SavePlayerCommand extends SlashCommand {
   constructor() {
@@ -11,9 +11,9 @@ export default class SavePlayerCommand extends SlashCommand {
   }
 
   exec(interaction: CommandInteraction) {
-    leaderBoard();
-    interaction.reply({
-      embeds: [primaryEmbed("leaderboard", "Yay this works!")],
-    });
+    leaderBoard(interaction);
+  }
+  build(client: Client<boolean>, defaultCommand: SlashCommandBuilder) {
+    return defaultCommand.toJSON();
   }
 }

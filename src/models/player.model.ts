@@ -16,6 +16,13 @@ Player.init(
     battletag: {
       type: DataTypes.STRING,
     },
+    discriminator: {
+      type: DataTypes.INTEGER,
+    },
+    level: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
   },
   { sequelize }
 );

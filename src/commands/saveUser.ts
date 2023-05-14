@@ -1,17 +1,16 @@
 import SlashCommand from "../structures/Command";
 import { Client, CommandInteraction, SlashCommandBuilder } from "discord.js";
-import { primaryEmbed } from "../utils/embeds";
-import { savePlayer } from "../controllers/player.controller";
+import { saveUser } from "../controllers/user.controller";
 
-export default class SavePlayerCommand extends SlashCommand {
+export default class SaveUserCommand extends SlashCommand {
   constructor() {
-    super("saveplayer", "Add a battletag for a user.", {
+    super("saveuser", "Add a battletag for a user.", {
       requiredPermissions: ["Administrator"],
     });
   }
 
   exec(interaction: CommandInteraction) {
-    savePlayer(interaction);
+    saveUser(interaction);
   }
   build(client: Client<boolean>, defaultCommand: SlashCommandBuilder) {
     return defaultCommand

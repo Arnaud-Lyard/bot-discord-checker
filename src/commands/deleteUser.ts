@@ -5,7 +5,7 @@ import { deleteUser } from "../controllers/user.controller";
 
 export default class DeleteUserCommand extends SlashCommand {
   constructor() {
-    super("deleteuser", "Delete a user and his information", {
+    super("deleteuser", "Delete a user and his battletag", {
       requiredPermissions: ["Administrator"],
     });
   }

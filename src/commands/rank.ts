@@ -1,7 +1,7 @@
 import SlashCommand from "../structures/Command";
 import { Client, CommandInteraction, SlashCommandBuilder } from "discord.js";
 import { primaryEmbed } from "../utils/embeds";
-import { rank } from "../controllers/ranking.controller";
+import { rank } from "../controllers/player.controller";
 
 export default class SavePlayerCommand extends SlashCommand {
   constructor() {
@@ -12,9 +12,6 @@ export default class SavePlayerCommand extends SlashCommand {
 
   exec(interaction: CommandInteraction) {
     rank(interaction);
-    interaction.reply({
-      embeds: [primaryEmbed("rank", "Yay this works!")],
-    });
   }
   build(client: Client<boolean>, defaultCommand: SlashCommandBuilder) {
     return defaultCommand
