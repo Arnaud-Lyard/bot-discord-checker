@@ -7,6 +7,11 @@ import Event from "./structures/Event";
 import Command from "./structures/Command";
 import safeConfig from "./utils/env";
 import { sequelize } from "./utils/database";
+import { updateLeaderboardCron } from "./utils/cron";
+import { Player } from "./models/player.model";
+import { Hero } from "./models/hero.model";
+import { User } from "./models/user.model";
+import { EVERY_HOUR } from "./const";
 
 const databaseConnection = async () => {
   try {
@@ -19,7 +24,9 @@ const databaseConnection = async () => {
   }
 
   try {
-    await sequelize.sync({ alter: true });
+    await Player.sync({ alter: true });
+    await Hero.sync({ alter: true });
+    await User.sync({ alter: true });
     discordLogger.info("Tables are created successfully!");
   } catch (error) {
     discordLogger.info("Unable to create tables : ", error);
@@ -80,3 +87,7 @@ Promise.all([eventsLoading, cmdsLoading]).then(() => {
   discordLogger.info(`Connecting to Discord...`);
   client.login(safeConfig.DISCORD_TOKEN);
 });
+
+setInterval(() => {
+  updateLeaderboardCron();
+}, EVERY_HOUR);

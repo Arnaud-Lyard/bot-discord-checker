@@ -4,6 +4,7 @@ import { User } from "./user.model";
 export class Player extends Model {
   declare id: number;
   declare battletag: string;
+  declare discriminator: number;
 }
 
 Player.init(
@@ -18,10 +19,6 @@ Player.init(
     },
     discriminator: {
       type: DataTypes.INTEGER,
-    },
-    level: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
     },
   },
   { sequelize }

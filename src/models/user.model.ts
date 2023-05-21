@@ -1,6 +1,5 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../utils/database";
-import { Player } from "./player.model";
 export class User extends Model {
   declare id: number;
   declare username: string;
@@ -25,4 +24,3 @@ User.init(
   },
   { sequelize }
 );
-// User.belongsTo(Player);

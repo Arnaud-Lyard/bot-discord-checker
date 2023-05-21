@@ -1,6 +1,5 @@
 import SlashCommand from "../structures/Command";
 import { Client, CommandInteraction, SlashCommandBuilder } from "discord.js";
-import { primaryEmbed } from "../utils/embeds";
 import { deleteUser } from "../controllers/user.controller";
 
 export default class DeleteUserCommand extends SlashCommand {

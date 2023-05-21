@@ -147,7 +147,7 @@ export const deleteUser = async (
       embeds: [
         primaryEmbed(
           "deleteuser",
-          `User ${username}#${discriminator} and his battletag have been deleted`
+          `User ${username}#${discriminator} and all his informations have been deleted`
         ),
       ],
     });
