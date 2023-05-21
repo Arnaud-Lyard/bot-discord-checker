@@ -11,24 +11,22 @@ export default class HelpCommand extends SlashCommand {
 
   exec(interaction: CommandInteraction) {
     interaction.reply({
-      embeds: [primaryEmbed("help", "Yay this works!")],
+      embeds: [
+        primaryEmbed(
+          "help",
+          `*You must fallow all next steps to use the bot.* \n
+          **Rules :** Read and accept the rules of the server. \n
+          **Register :** Contact an admin. \n
+          **Create a character :** Use the command /addhero. \n
+          **See your rank :** Use the command /rank \n
+          **See the leaderboard :** Use the command /leaderboard \n
+      `
+        ),
+      ],
     });
   }
 
   build(client: Client<boolean>, defaultCommand: SlashCommandBuilder) {
-    return defaultCommand
-      .addBooleanOption((boolean) =>
-        boolean
-          .setName("boolean")
-          .setDescription("test boolean option")
-          .setRequired(true)
-      )
-      .addStringOption((string) =>
-        string
-          .setName("string")
-          .setDescription("test string option")
-          .setRequired(true)
-      )
-      .toJSON();
+    return defaultCommand.toJSON();
   }
 }
