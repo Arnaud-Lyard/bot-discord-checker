@@ -15,7 +15,7 @@ services:
     volumes:
       - prodDB:/var/lib/postgresql/data
 
-  server:
+  app:
     depends_on:
       prodDB:
         condition: service_healthy

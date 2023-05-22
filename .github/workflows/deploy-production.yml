@@ -1,12 +1,12 @@
-name: Compile and push bot to production
+name: Compile and push app to production
 
 on:
   push:
-    branches: ["develop"]
+    branches: ["main"]
   workflow_dispatch:
 
 jobs:
-  build-and-push-server:
+  build-and-push-app:
     runs-on: ubuntu-latest
     steps:
       - name: Set up QEMU
@@ -25,3 +25,13 @@ jobs:
           context: "{{defaultContext}}"
           file: "Dockerfile.production"
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/bot-discord
+
+  notify:
+    needs:
+      - build-and-push-app
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call VPS webhook to update production
+        uses: wei/curl@master
+        with:
+          args: ${{ secrets.WEBHOOK_PRODUCTION_URL }}
