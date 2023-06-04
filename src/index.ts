@@ -8,9 +8,6 @@ import Command from "./structures/Command";
 import safeConfig from "./utils/env";
 import { sequelize } from "./utils/database";
 import { updateLeaderboardCron } from "./utils/cron";
-import { Player } from "./models/player.model";
-import { Hero } from "./models/hero.model";
-import { User } from "./models/user.model";
 import { EVERY_HOUR } from "./const";
 
 const databaseConnection = async () => {
@@ -24,9 +21,7 @@ const databaseConnection = async () => {
   }
 
   try {
-    await Player.sync({ alter: true });
-    await Hero.sync({ alter: true });
-    await User.sync({ alter: true });
+    sequelize.sync();
     discordLogger.info("Tables are created successfully!");
   } catch (error) {
     discordLogger.info("Unable to create tables : ", error);

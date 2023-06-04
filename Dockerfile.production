@@ -9,12 +9,12 @@ WORKDIR /app
 
 COPY package.json ./
 COPY /pnpm-lock.yaml ./
+COPY config.yml ./
 RUN npm i -g pnpm
 RUN pnpm i
 
 COPY tsconfig.json ./
 COPY src ./
-COPY config.yml config.yml
 
 RUN ["pnpm", "build"]
 CMD ["pnpm", "start:prod"]

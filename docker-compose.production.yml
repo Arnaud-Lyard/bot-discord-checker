@@ -1,5 +1,5 @@
 services:
-  prodDB:
+  discordprodDB:
     image: postgres:15-alpine
     environment:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
@@ -13,27 +13,35 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - prodDB:/var/lib/postgresql/data
+      - discordprodDB:/var/lib/postgresql/data
+    networks:
+      - prodNetwork
 
-  app:
+  server:
     depends_on:
-      prodDB:
+      discordprodDB:
         condition: service_healthy
     environment:
-      - NODE_ENV=${NODE_ENV}
-      - DB_HOST=${DB_HOST}
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
-      - DB_NAME=${DB_NAME}
-      - DB_PORT=${DB_PORT}
-      - DISCORD_TOKEN=${DISCORD_TOKEN}
-      - DISCORD_APPLICATION_ID=${DISCORD_APPLICATION_ID}
-      - DISCORD_PUBLIC_KEY=${DISCORD_PUBLIC_KEY}
-      - BNET_CLIENT_ID=${BNET_CLIENT_ID}
-      - BNET_CLIENT_SECRET=${BNET_CLIENT_SECRET}
-      - BNET_GRANT_TYPE=${BNET_GRANT_TYPE}
-      - BNET_TOKEN_URL=${BNET_TOKEN_URL}
+      - NODE_ENV=${NODE_ENV:-production}
+      - DB_HOST=${DB_HOST:-discordprodDB}
+      - DB_USER=${DB_USER:-postgres}
+      - DB_PASSWORD=${DB_PASSWORD:-postgres}
+      - DB_NAME=${DB_NAME:-postgres}      
+      - DB_PORT=${DB_PORT:-5432}
+      - DISCORD_TOKEN=${DISCORD_TOKEN:-token}
+      - DISCORD_APPLICATION_ID=${DISCORD_APPLICATION_ID:-123456}
+      - DISCORD_PUBLIC_KEY=${DISCORD_PUBLIC_KEY:-123456}
+      - BNET_CLIENT_ID=${BNET_CLIENT_ID:-123456}
+      - BNET_CLIENT_SECRET=${BNET_CLIENT_SECRET:-123456}
+      - BNET_GRANT_TYPE=${BNET_GRANT_TYPE:-test}
+      - BNET_TOKEN_URL=${BNET_TOKEN_URL:-url}
     image: arnaudlyard/bot-discord
+    networks:
+      - prodNetwork
 
 volumes:
-  prodDB:
+  discordprodDB:
+
+networks:
+  prodNetwork:
+  

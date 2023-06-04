@@ -9,7 +9,7 @@ export default class SaveUserCommand extends SlashCommand {
     });
   }
 
-  exec(interaction: CommandInteraction) {
+  async exec(interaction: CommandInteraction) {
     saveUser(interaction);
   }
   build(client: Client<boolean>, defaultCommand: SlashCommandBuilder) {

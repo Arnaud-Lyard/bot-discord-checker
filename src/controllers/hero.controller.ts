@@ -35,7 +35,7 @@ export const addHero = async (
     });
   }
   try {
-    const heroToAdd = await Hero.create({
+    await Hero.create({
       hero: hero,
       playerId: playerToUpdate.id,
       class: classe,
