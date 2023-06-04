@@ -1,5 +1,5 @@
 import SlashCommand from "../structures/Command";
-import { Client, CommandInteraction, SlashCommandBuilder } from "discord.js";
+import { Client, CommandInteraction, PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 import { deleteUser } from "../controllers/user.controller";
 
 export default class DeleteUserCommand extends SlashCommand {
@@ -20,6 +20,7 @@ export default class DeleteUserCommand extends SlashCommand {
           .setDescription("The user to delete.")
           .setRequired(true)
       )
+      .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
       .toJSON();
   }
 }

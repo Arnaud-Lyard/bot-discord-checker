@@ -1,5 +1,5 @@
 import SlashCommand from "../structures/Command";
-import { Client, CommandInteraction, SlashCommandBuilder } from "discord.js";
+import { Client, CommandInteraction, PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 import { saveUser } from "../controllers/user.controller";
 
 export default class SaveUserCommand extends SlashCommand {
@@ -26,6 +26,7 @@ export default class SaveUserCommand extends SlashCommand {
           .setDescription("The battletag to add.")
           .setRequired(true)
       )
+      .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
       .toJSON();
   }
 }

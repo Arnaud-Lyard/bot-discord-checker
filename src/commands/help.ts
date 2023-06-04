@@ -4,9 +4,7 @@ import { primaryEmbed } from "../utils/embeds";
 
 export default class HelpCommand extends SlashCommand {
   constructor() {
-    super("help", "An help command.", {
-      requiredPermissions: ["MentionEveryone"],
-    });
+    super("help", "An help command.");
   }
 
   exec(interaction: CommandInteraction) {

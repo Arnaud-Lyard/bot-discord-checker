@@ -1,13 +1,10 @@
 import SlashCommand from "../structures/Command";
 import { Client, CommandInteraction, SlashCommandBuilder } from "discord.js";
-import { primaryEmbed } from "../utils/embeds";
 import { rank } from "../controllers/player.controller";
 
 export default class SavePlayerCommand extends SlashCommand {
   constructor() {
-    super("rank", "Get my rank in leaderboard.", {
-      requiredPermissions: ["MentionEveryone"],
-    });
+    super("rank", "Get my rank in leaderboard.");
   }
 
   exec(interaction: CommandInteraction) {
