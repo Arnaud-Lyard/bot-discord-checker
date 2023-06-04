@@ -4,9 +4,7 @@ import { addHero } from "../controllers/hero.controller";
 
 export default class SaveUserCommand extends SlashCommand {
   constructor() {
-    super("addhero", "Add a hero for a user.", {
-      requiredPermissions: ["MentionEveryone"],
-    });
+    super("addhero", "Add a hero for a user.");
   }
 
   exec(interaction: CommandInteraction) {

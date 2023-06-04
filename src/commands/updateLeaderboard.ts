@@ -1,5 +1,5 @@
 import SlashCommand from "../structures/Command";
-import { Client, CommandInteraction, SlashCommandBuilder } from "discord.js";
+import { Client, CommandInteraction, PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 import { updateLeaderboard } from "../controllers/player.controller";
 
 export default class UpdateLeaderboardCommand extends SlashCommand {
@@ -13,6 +13,8 @@ export default class UpdateLeaderboardCommand extends SlashCommand {
     updateLeaderboard(interaction);
   }
   build(client: Client<boolean>, defaultCommand: SlashCommandBuilder) {
-    return defaultCommand.toJSON();
+    return defaultCommand
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+    .toJSON();
   }
 }
