@@ -8,7 +8,7 @@ import Command from "./structures/Command";
 import safeConfig from "./utils/env";
 import { sequelize } from "./utils/database";
 import { updateLeaderboardCron } from "./utils/cron";
-import { EVERY_HOUR } from "./const";
+import { EVERY_HOUR, EVERY_WEEK } from "./const";
 
 const databaseConnection = async () => {
   try {
@@ -85,4 +85,4 @@ Promise.all([eventsLoading, cmdsLoading]).then(() => {
 
 setInterval(() => {
   updateLeaderboardCron();
-}, EVERY_HOUR);
+}, EVERY_WEEK);
