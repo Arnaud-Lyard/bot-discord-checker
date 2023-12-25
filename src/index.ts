@@ -82,7 +82,3 @@ Promise.all([eventsLoading, cmdsLoading]).then(() => {
   discordLogger.info(`Connecting to Discord...`);
   client.login(safeConfig.DISCORD_TOKEN);
 });
-
-setInterval(() => {
-  updateLeaderboardCron();
-}, EVERY_WEEK);

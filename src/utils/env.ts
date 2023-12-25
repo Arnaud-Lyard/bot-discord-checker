@@ -13,10 +13,6 @@ interface ENV {
   DISCORD_TOKEN: string | undefined;
   DISCORD_APPLICATION_ID: string | undefined;
   DISCORD_PUBLIC_KEY: string | undefined;
-  BNET_CLIENT_ID: string | undefined;
-  BNET_CLIENT_SECRET: string | undefined;
-  BNET_GRANT_TYPE: string | undefined;
-  BNET_TOKEN_URL: string | undefined;
   DB_PASSWORD: string | undefined;
   DB_USER: string | undefined;
   DB_NAME: string | undefined;
@@ -29,10 +25,6 @@ interface Config {
   DISCORD_TOKEN: string;
   DISCORD_APPLICATION_ID: string;
   DISCORD_PUBLIC_KEY: string;
-  BNET_CLIENT_ID: string;
-  BNET_CLIENT_SECRET: string;
-  BNET_GRANT_TYPE: string;
-  BNET_TOKEN_URL: string;
   DB_PASSWORD: string;
   DB_USER: string;
   DB_NAME: string;
@@ -48,10 +40,6 @@ const getConfig = (): ENV => {
     DISCORD_TOKEN: process.env.DISCORD_TOKEN,
     DISCORD_APPLICATION_ID: process.env.DISCORD_APPLICATION_ID,
     DISCORD_PUBLIC_KEY: process.env.DISCORD_PUBLIC_KEY,
-    BNET_CLIENT_ID: process.env.BNET_CLIENT_ID,
-    BNET_CLIENT_SECRET: process.env.BNET_CLIENT_SECRET,
-    BNET_GRANT_TYPE: process.env.BNET_GRANT_TYPE,
-    BNET_TOKEN_URL: process.env.BNET_TOKEN_URL,
     DB_PASSWORD: process.env.DB_PASSWORD,
     DB_USER: process.env.DB_USER,
     DB_NAME: process.env.DB_NAME,
