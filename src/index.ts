@@ -7,6 +7,7 @@ import Event from "./structures/Event";
 import { sequelize } from "./utils/database";
 import safeConfig from "./utils/env";
 import { discordLogger } from "./utils/logger";
+import { domainCron } from "./cron/domain-cron";
 
 const databaseConnection = async () => {
   try {
@@ -79,4 +80,8 @@ Promise.all([eventsLoading, cmdsLoading]).then(() => {
   discordLogger.info("Finished loading commands and events.");
   discordLogger.info(`Connecting to Discord...`);
   client.login(safeConfig.DISCORD_TOKEN);
+});
+
+client.once("ready", () => {
+  domainCron();
 });

@@ -17,10 +17,6 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    discriminator: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
   },
   { sequelize }
 );

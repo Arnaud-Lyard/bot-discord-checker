@@ -11,7 +11,8 @@
     "dev": "ts-node-dev --poll src/index.ts",
     "edition": "pnpm dev edit commandName",
     "delete": "pnpm dev del commandNumber",
-    "docker:up": "docker compose -f docker-compose.dev.yml up --build"
+    "docker:up": "docker compose -f docker-compose.dev.yml up --build",
+    "start:command": "pnpm start deploy"
   },
   "keywords": [],
   "author": "",
