@@ -9,5 +9,6 @@ export const sequelize = new Sequelize(
     host: safeConfig.DB_HOST,
     port: safeConfig.DB_PORT,
     dialect: "postgres",
+    logging: safeConfig.NODE_ENV === "development" ? true : false,
   }
 );

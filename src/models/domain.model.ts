@@ -5,7 +5,7 @@ import { User } from "./user.model";
 export class Domain extends Model {
   declare id: number;
   declare url: string;
-  declare status: "progress" | "online" | "offline";
+  declare status: "progress" | "online" | "error";
 }
 
 Domain.init(
@@ -20,7 +20,7 @@ Domain.init(
     },
     status: {
       type: DataTypes.ENUM({
-        values: ["progress", "online", "offline"],
+        values: ["progress", "online", "error"],
       }),
     },
   },

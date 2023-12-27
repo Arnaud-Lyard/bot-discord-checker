@@ -51,8 +51,8 @@ const getConfig = (): ENV => {
     DB_NAME: process.env.DB_NAME,
     DB_HOST: process.env.DB_HOST,
     DB_PORT: process.env.DB_PORT ? Number(process.env.DB_PORT) : undefined,
-    HANDLE_DOMAINS_ALERT_SPEED: process.env.HANDLE_DOMAINS_NOTIFICATION_SPEED
-      ? Number(process.env.HANDLE_DOMAINS_NOTIFICATION_SPEED)
+    HANDLE_DOMAINS_ALERT_SPEED: process.env.HANDLE_DOMAINS_ALERT_SPEED
+      ? Number(process.env.HANDLE_DOMAINS_ALERT_SPEED)
       : undefined,
   };
 };
