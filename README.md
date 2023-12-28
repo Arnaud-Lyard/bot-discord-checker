@@ -1,34 +1,27 @@
-# Discord-Bot
+# Discord Bot Checker
 
-Discord-Bot is an interactive Discord bot designed to manage a ranking system for players of the game Diablo IV. It offers several features, including registration to the ranking system, listing available commands, viewing personal ranking, checking the list of top players, and choosing the type of character.
+Discord Bot Checker sends alerts on Discord if a specified website is no longer online.
 
-## Table of Contents
+## Installation
 
-- [Installation Steps](#installation-steps)
-- [Key Features](#key-features)
-- [screenshots](#screenshots)
-- [Technologies](#technologies)
+The project is containerized. At the project's root, run the following command to launch the container:
 
-## Installation Steps
-
-To use Discord-Bot, make sure you have the pnpm package manager and Node.js installed. Then, launch the project with the following command:
 ```bash
-docker-compose -f docker-compose.dev.yml up --build
+pnpm docker:up
 ```
 
-## Key Features
-- Register to the ranking system
-- List available commands
-- View personal ranking
-- Check the list of top players
-- Choose the type of character
+Ensure Docker, Node.js and pnpm are installed beforehand.
 
-## Screenshots
-![capture](./images/capture.png)
+## Key Features
+
+Integration with a database for Discord command interactions (registering a user, adding a URL, displaying registered URLs).
+Recurrent task checking the availability of registered sites.
 
 ## Technologies
-- [Node.js](https://nodejs.org/)
-- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Discord.js](https://discord.js.org/)
-- [Sequelize](https://sequelize.org/)
+
+- Docker
+- Node.js
+- JavaScript
+- TypeScript
+- Discord.js
+- Sequelize
