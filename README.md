@@ -12,6 +12,10 @@ pnpm docker:up
 
 Ensure Docker, Node.js and pnpm are installed beforehand.
 
+## Screenshots
+
+![capture](./images/bot-discord-checker-capture.png)
+
 ## Key Features
 
 Integration with a database for Discord command interactions (registering a user, adding a URL, displaying registered URLs).
