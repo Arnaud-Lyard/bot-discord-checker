@@ -33,7 +33,7 @@ services:
       - DB_PORT=${DB_PORT}
       - HANDLE_DOMAINS_ALERT_SPEED=${HANDLE_DOMAINS_ALERT_SPEED}
       - DISCORD_NOTIFICATION_CHANNEL_ID=${DISCORD_NOTIFICATION_CHANNEL_ID}
-    image: arnaudlyard/bot-discord
+    image: arnaudlyard/bot-discord-checker
     networks:
       - prodNetwork
 
