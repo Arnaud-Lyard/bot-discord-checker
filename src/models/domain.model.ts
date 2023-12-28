@@ -1,29 +1,32 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../utils/database";
 import { User } from "./user.model";
-export class Player extends Model {
+
+export class Domain extends Model {
   declare id: number;
-  declare battletag: string;
-  declare discriminator: number;
+  declare url: string;
+  declare status: "progress" | "online" | "error";
 }
 
-Player.init(
+Domain.init(
   {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    battletag: {
+    url: {
       type: DataTypes.STRING,
     },
-    discriminator: {
-      type: DataTypes.INTEGER,
+    status: {
+      type: DataTypes.ENUM({
+        values: ["progress", "online", "error"],
+      }),
     },
   },
   { sequelize }
 );
-User.hasMany(Player, {
+User.hasMany(Domain, {
   foreignKey: "userId",
   onDelete: "CASCADE",
 });

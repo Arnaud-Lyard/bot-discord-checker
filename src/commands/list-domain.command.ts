@@ -1,23 +1,29 @@
+import {
+  Client,
+  CommandInteraction,
+  PermissionFlagsBits,
+  SlashCommandBuilder,
+} from "discord.js";
+import { listDomain } from "../services/domain.service";
 import SlashCommand from "../structures/Command";
-import { Client, CommandInteraction, SlashCommandBuilder } from "discord.js";
-import { rank } from "../controllers/player.controller";
 
 export default class SavePlayerCommand extends SlashCommand {
   constructor() {
-    super("rank", "Get my rank in leaderboard.");
+    super("listdomain", "See full domain list.");
   }
 
   exec(interaction: CommandInteraction) {
-    rank(interaction);
+    listDomain(interaction);
   }
   build(client: Client<boolean>, defaultCommand: SlashCommandBuilder) {
     return defaultCommand
       .addUserOption((user) =>
         user
           .setName("user")
-          .setDescription("Get rank for a user")
+          .setDescription("The user owner of domain list")
           .setRequired(true)
       )
+      .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
       .toJSON();
   }
 }

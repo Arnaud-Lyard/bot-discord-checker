@@ -1,16 +1,21 @@
 import SlashCommand from "../structures/Command";
-import { Client, CommandInteraction, PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
-import { saveUser } from "../controllers/user.controller";
+import {
+  Client,
+  CommandInteraction,
+  PermissionFlagsBits,
+  SlashCommandBuilder,
+} from "discord.js";
+import { addUser } from "../services/user.service";
 
 export default class SaveUserCommand extends SlashCommand {
   constructor() {
-    super("saveuser", "Add a battletag for a user.", {
+    super("adduser", "Add a new user.", {
       requiredPermissions: ["Administrator"],
     });
   }
 
   async exec(interaction: CommandInteraction) {
-    saveUser(interaction);
+    addUser(interaction);
   }
   build(client: Client<boolean>, defaultCommand: SlashCommandBuilder) {
     return defaultCommand
@@ -18,12 +23,6 @@ export default class SaveUserCommand extends SlashCommand {
         user
           .setName("user")
           .setDescription("The user to add.")
-          .setRequired(true)
-      )
-      .addStringOption((battletag) =>
-        battletag
-          .setName("battletag")
-          .setDescription("The battletag to add.")
           .setRequired(true)
       )
       .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)

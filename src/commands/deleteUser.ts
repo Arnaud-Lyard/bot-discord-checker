@@ -1,6 +1,11 @@
+import {
+  Client,
+  CommandInteraction,
+  PermissionFlagsBits,
+  SlashCommandBuilder,
+} from "discord.js";
+import { deleteUser } from "../services/user.service";
 import SlashCommand from "../structures/Command";
-import { Client, CommandInteraction, PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
-import { deleteUser } from "../controllers/user.controller";
 
 export default class DeleteUserCommand extends SlashCommand {
   constructor() {

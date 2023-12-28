@@ -1,14 +1,13 @@
 import Discord from "discord.js";
+import express from "express";
 import fs from "fs";
 import path from "path";
-import express from "express";
-import { discordLogger } from "./utils/logger";
-import Event from "./structures/Event";
 import Command from "./structures/Command";
-import safeConfig from "./utils/env";
+import Event from "./structures/Event";
 import { sequelize } from "./utils/database";
-import { updateLeaderboardCron } from "./utils/cron";
-import { EVERY_HOUR, EVERY_WEEK } from "./const";
+import safeConfig from "./utils/env";
+import { discordLogger } from "./utils/logger";
+import { domainCron } from "./cron/domain-cron";
 
 const databaseConnection = async () => {
   try {
@@ -83,6 +82,6 @@ Promise.all([eventsLoading, cmdsLoading]).then(() => {
   client.login(safeConfig.DISCORD_TOKEN);
 });
 
-setInterval(() => {
-  updateLeaderboardCron();
-}, EVERY_WEEK);
+client.once("ready", () => {
+  domainCron();
+});
