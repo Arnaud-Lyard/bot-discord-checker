@@ -16,9 +16,7 @@ export async function domainCron() {
 async function handleDomainsAlert() {
   try {
     const domains = await getAllDomains();
-    if (!domains) {
-      return;
-    }
+    if (domains.length === 0) return;
 
     const promises = domains.map(async (domain) => {
       try {
@@ -57,13 +55,8 @@ async function handleDomainsAlert() {
   }
 }
 
-async function getAllDomains(): Promise<Domain[] | undefined> {
-  try {
-    const domains = await Domain.findAll();
-    return domains;
-  } catch (error) {
-    discordLogger.error(error);
-  }
+async function getAllDomains(): Promise<Domain[]> {
+  return await Domain.findAll();
 }
 
 async function updateDomainStatus(domain: string, status: DomainStatus) {
